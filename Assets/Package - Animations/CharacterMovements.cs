@@ -13,46 +13,55 @@ public class CharacterMovements : MonoBehaviour
     Vector3 moveDirection;
     Rigidbody rb;
     bool isGrounded;
+    Animator PaladinAnimation;
+    public Transform cubeCamera;
+    float runningSpeed =5f;
+    float WalkingSpeed = 2.5f;
+    float boostValue = 0;
 
     float vertical, horizontal;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        PaladinAnimation = GetComponent<Animator>();
+        
     }
     
     // Update is called once per frame
     void Update()
     {
-        // Ground check
-        // Créer un layer pour le personnage pour qu'il évite de se détecter lui-même
-        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundLayerMask, QueryTriggerInteraction.Ignore);
+        
+
 
         // 1.2 Inputs
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
 
         // Déplacements
-        moveDirection = transform.forward * vertical;
-        moveDirection += transform.right * horizontal;
+        moveDirection = cubeCamera.forward * vertical;
+        moveDirection += cubeCamera.right * horizontal;
 
-        // ------------------------------------------------------------
-
-        // Jump -------------------------------------------------------
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {            
-            Jump();
-        }
-
+        // animations des mouvements pour le personage pricipale
+        PaladinAnimation.SetFloat("Horizontal", horizontal);
+        PaladinAnimation.SetFloat("Vertical", vertical);
         // Respawn ------------------------------------------------
         if (transform.position.y < -15f)
             transform.position = Vector3.zero;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = runningSpeed;
+            PaladinAnimation.SetFloat("Horizontal", horizontal);
+            PaladinAnimation.SetFloat("Vertical", vertical);
+
+        }
+        else
+            speed = WalkingSpeed;
+        PaladinAnimation.SetFloat("Horizontal", horizontal);
+        PaladinAnimation.SetFloat("Vertical", vertical);
     }
 
-    public void Jump()
-    {
-        rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
-    }
+
 
     private void FixedUpdate()
     {        
