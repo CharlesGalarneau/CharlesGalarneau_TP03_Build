@@ -8,8 +8,9 @@ public class Ennemies : MonoBehaviour
     public Transform target;
 
     NavMeshAgent agent;
-
+    GameObject Weapon;
     int hitpoints;
+    
 
     void Start()
     {
@@ -77,4 +78,5 @@ public class Ennemies : MonoBehaviour
         CancelInvoke("UpdateDestination");
         Destroy(gameObject);
     }
+   
 }
