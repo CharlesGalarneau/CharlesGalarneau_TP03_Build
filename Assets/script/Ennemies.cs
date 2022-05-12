@@ -10,12 +10,13 @@ public class Ennemies : MonoBehaviour
     NavMeshAgent agent;
     GameObject Weapon;
     int hitpoints;
+    Animator Animator;
     
 
     void Start()
     {
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
-        //hitpoints = Random.Range(2, 4);
+        hitpoints = Random.Range(2, 6);
 
       
     }
@@ -24,6 +25,7 @@ public class Ennemies : MonoBehaviour
     public void SetTarget(Transform t)
     {
         agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
 
         target = t;
 
@@ -53,26 +55,35 @@ public class Ennemies : MonoBehaviour
             return;
 
         // Récupère tous les colliders à proximité
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.4f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
 
         foreach (var item in colliders)
         {
             // Si l'un des collider est celui du joueur, il meurt
             if (item.name == "Player")
-                FindObjectOfType<GameManager>().GameOver();
+            {
+                Animator.SetBool("IsAttacking", true);
+                Debug.Log(Animator.GetBool("IsAttacking"));
+                FindObjectOfType<GameManager>().TakeDamage();
+            }
+            
+            else
+            {
+                Animator.SetBool("IsAttacking", false);
+            }
         }
     }
 
-    // Zombie s'est fait tiré
-    public void Shot()
+    // Skelete s'est fait tiré
+    public void Hit()
     {
         hitpoints--;
 
-        if (hitpoints < 1)
+        if (hitpoints <= 0)
             Die();
     }
 
-    // Le zombie meurt
+    // Le boneboy meurt
     public void Die()
     {
         CancelInvoke("UpdateDestination");

@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     bool IsAttackingLight = true;
-    bool IsAttackingHeavy;
+    bool IsAttackingHeavy =true;
     bool IsAttackingUnarmed =true;
     bool IsattackingArmed;
-    float AttackDammage;
+    float AttackDamage;
     float attackSpeed;
     public bool Isarmed = false;
     public GameObject PunchPoints;
     public Animator Animator;
     public int ChargeHeavy = 0;
-    // Start is called before the first frame update
+    // Start is called before the first frame update;
     void Start()
     {
         Animator = GetComponent<Animator>();
@@ -25,10 +25,10 @@ public class PlayerAttack : MonoBehaviour
     {
 
 
-        if (Input.GetMouseButtonDown(0) && IsAttackingUnarmed  && IsAttackingLight)
+        if (Input.GetMouseButtonDown(0) && IsAttackingUnarmed && IsAttackingLight)
         {
-           
-                AttacklightUnarmed();
+
+            AttacklightUnarmed();
 
 
         }
@@ -54,7 +54,14 @@ public class PlayerAttack : MonoBehaviour
         {
             AttacklightUnarmed();
         }
-        
+        if (Input.GetMouseButtonUp(0))
+        { 
+            Animator.SetBool("IsAttackingLight", false);
+        Animator.SetBool("IsEquipt", false);
+            Animator.SetBool("IsAttackingHeavy", false);
+            
+        }
+
     }
     IEnumerator HeavyDelay()
     {
@@ -66,24 +73,25 @@ public class PlayerAttack : MonoBehaviour
     void AttacklightUnarmed()
     {
         Animator.SetBool("IsAttackingLight", true);
-        Animator.SetBool("IsAttackingUnarmed", true);
+        Animator.SetBool("IsEquipt", false);
     }
     void AttackHeavyUnarmed()
     {
         Animator.SetBool("IsAttackingHeavy", true);
-        Animator.SetBool("IsAttackingUnarmed", true);
+        Animator.SetBool("IsEquipt", false);
         StopCoroutine(HeavyDelay());
     }
     void AttacklightArmed()
     {
         Animator.SetBool("IsAttackingLight", true);
-        Animator.SetBool("IsAttackingArmed", true);
+        Animator.SetBool("IsEquipt", true);
 
     }
     void AttackHeavyArmed()
     {
         Animator.SetBool("IsAttackingHeavy", true);
-        Animator.SetBool("IsAttackingArmed", true);
+        Animator.SetBool("IsEquipt", true);
+        StopCoroutine(HeavyDelay());
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -91,7 +99,7 @@ public class PlayerAttack : MonoBehaviour
         {
 
             Ennemies ennemies = other.GetComponent<Ennemies>();
-
+            FindObjectOfType<Ennemies>().Hit();
             
         }
     }

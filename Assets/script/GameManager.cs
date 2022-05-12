@@ -32,12 +32,7 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    public void GameOver()
-    {
-        isGameOver = true;
-        
-        Time.timeScale = 0f;
-    }
+  
 
 
     IEnumerator Spawner()
@@ -68,4 +63,16 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    public void TakeDamage()
+    {
+        Debug.Log("player take Damage");
+        FindObjectOfType<PlayerStat>().PlayerLoseLife();
+    }
+    public void GameOver()
+    {
+        isGameOver = true;
+
+        
+    }
+
 }
