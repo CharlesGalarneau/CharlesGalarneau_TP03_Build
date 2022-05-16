@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("P pressed");
+           
             interfaceMenu.OuvertureMenu();
         }
     }
@@ -84,5 +84,10 @@ public class GameManager : MonoBehaviour
     {
         Paused = true;
         
+    }
+    public void StopPauseJeu()
+    {
+        Paused = false;
+
     }
 }

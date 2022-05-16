@@ -29,6 +29,7 @@ public class InterfaceMenu : MonoBehaviour
     public void FermetureMenu()
     {
         gameObject.SetActive(false);
+        Gamemanager.StopPauseJeu();
     }
     public void OvertureOption()
     {

@@ -16,11 +16,13 @@ public class PlayerStat : MonoBehaviour
     Animator animator;
     public AudioSource Deathsound;
     public float foix;
+    public CharacterMovements Charactermovements;
     public float StaminaRegen =.25f;
-
+    public float WalkingSpeed = 2.5f;
     // Start is called before the first frame update
     void Start()
     {
+        Charactermovements = FindObjectOfType<CharacterMovements>();
         animator = GetComponent<Animator>();
         Hp = 25;
     }
@@ -78,11 +80,34 @@ public class PlayerStat : MonoBehaviour
     }
     public void StaminaRegeneration()
     {
-        Stamina += StaminaRegen * Time.deltaTime;
+        if ( Charactermovements.Isrunning == false)
+            Stamina += StaminaRegen * Time.deltaTime;
+        else
+            return;
     }
     public void StaminaCost()
     {
         Stamina -=staminaRunning * Time.deltaTime;
     }
-
+    public void UpgradeSpeed()
+    {
+        WalkingSpeed += WalkingSpeed * .05f;
+        
+    }
+    public void UpgradeAttack()
+    {
+        Attack += 1;
+    }
+    public void UpgradeMaxHp()
+    {
+        HpMax += 5;
+    }
+    public void UpgradeMaxMana()
+    {
+        manaMax += 5;
+    }
+    public void UpgradeMaxStamina()
+    {
+        StaminaMax += 5;
+    }
 }

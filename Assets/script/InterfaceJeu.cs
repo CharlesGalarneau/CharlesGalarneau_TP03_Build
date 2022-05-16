@@ -25,14 +25,22 @@ public class InterfaceJeu : MonoBehaviour
     public Slider ManaBar;
     public Slider HealthBar;
     public GameManager gameManager;
+    public Button MenuPersonnageButton;
+    public MenuPersonnage Menupersonnage;
+    public AudioSource DrinkingSound;
+   
+
     // Start is called before the first frame update
     void Start()
     {
         ManaButton.onClick.AddListener(ManaButtonClicked);
+        MenuPersonnageButton.onClick.AddListener(MenuPersonnageButtonClicked);
         HealingButton.onClick.AddListener(HealingButtonClicked);
         StaminaButton.onClick.AddListener(StaminaButtonClicked);
         playerStat = FindObjectOfType<PlayerStat>();
         gameManager = FindObjectOfType<GameManager>();
+       // Menupersonnage = FindObjectOfType<MenuPersonnage>();
+       
     }
 
     // Update is called once per frame
@@ -57,6 +65,7 @@ public class InterfaceJeu : MonoBehaviour
     {
         if (NbManaPotion > 0)
         {
+            DrinkingSound.Play();
             AnimationMana.Play();
             NbManaPotion--;
 
@@ -67,6 +76,7 @@ public class InterfaceJeu : MonoBehaviour
     {
         if (NbHealthPotion > 0)
         {
+            DrinkingSound.Play();
             AnimationHealth.Play();
             playerStat.HealthHealing();
             NbHealthPotion--;
@@ -76,11 +86,24 @@ public class InterfaceJeu : MonoBehaviour
     {
         if (NbStaminaPotion > 0)
         {
+            DrinkingSound.Play();
             AnimationStamina.Play();
         playerStat.StaminaHealing();
             NbStaminaPotion--;
         }
     
+    }
+    public void StaminaPotionBuy()
+    {
+        NbStaminaPotion++;
+    }
+    public void ManaPotionBuy()
+    {
+        NbManaPotion++;
+    }
+    public void HeathPotionBuy()
+    {
+        NbHealthPotion++;
     }
     public void IsGameOver()
     {
@@ -88,5 +111,9 @@ public class InterfaceJeu : MonoBehaviour
         {
             GameOver.gameObject.SetActive(true);
         }
+    }
+    public void MenuPersonnageButtonClicked()
+    {
+        Menupersonnage.OuvertureMenu();
     }
 }

@@ -21,6 +21,7 @@ public class CharacterMovements : MonoBehaviour
     public PlayerStat playerStat;
     public float Stamina;
     public float StaminaCost =2.5f;
+    public bool Isrunning;
 
     float vertical, horizontal;
 
@@ -34,10 +35,13 @@ public class CharacterMovements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         playerStat = FindObjectOfType<PlayerStat>();
         Stamina = playerStat.Stamina;
-        
-        
+        WalkingSpeed = playerStat.WalkingSpeed;
+
+
+
         // 1.2 Inputs
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
@@ -55,8 +59,10 @@ public class CharacterMovements : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && Stamina >0)
         {
             playerStat.StaminaCost(); 
+           
             Debug.Log(Stamina);
-            speed = runningSpeed;
+            Isrunning = true;
+            speed = WalkingSpeed *2;
             PaladinAnimation.SetFloat("Horizontal", horizontal);
             PaladinAnimation.SetFloat("Vertical", vertical);
 
@@ -64,7 +70,7 @@ public class CharacterMovements : MonoBehaviour
         else
             
         
-           playerStat.StaminaRegeneration();
+          
         
         speed = WalkingSpeed;
         PaladinAnimation.SetFloat("Horizontal", horizontal);
