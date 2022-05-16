@@ -96,14 +96,19 @@ public class InterfaceJeu : MonoBehaviour
     public void StaminaPotionBuy()
     {
         NbStaminaPotion++;
+        playerStat.foix -= 2.5f;
     }
     public void ManaPotionBuy()
     {
         NbManaPotion++;
+        playerStat.foix -= 5f;
     }
     public void HeathPotionBuy()
     {
+
         NbHealthPotion++;
+        playerStat.foix -= 5;
+
     }
     public void IsGameOver()
     {

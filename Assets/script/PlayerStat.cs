@@ -25,6 +25,8 @@ public class PlayerStat : MonoBehaviour
         Charactermovements = FindObjectOfType<CharacterMovements>();
         animator = GetComponent<Animator>();
         Hp = 25;
+        mana = 25;
+        foix = 25;
     }
 
     // Update is called once per frame
