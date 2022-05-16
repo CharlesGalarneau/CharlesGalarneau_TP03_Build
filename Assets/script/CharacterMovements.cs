@@ -18,6 +18,9 @@ public class CharacterMovements : MonoBehaviour
     float runningSpeed =5f;
     float WalkingSpeed = 2.5f;
     float boostValue = 0;
+    public PlayerStat playerStat;
+    public float Stamina;
+    public float StaminaCost =2.5f;
 
     float vertical, horizontal;
 
@@ -25,15 +28,16 @@ public class CharacterMovements : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         PaladinAnimation = GetComponent<Animator>();
-        
+       
     }
     
     // Update is called once per frame
     void Update()
     {
+        playerStat = FindObjectOfType<PlayerStat>();
+        Stamina = playerStat.Stamina;
         
-
-
+        
         // 1.2 Inputs
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
@@ -48,15 +52,21 @@ public class CharacterMovements : MonoBehaviour
         // Respawn ------------------------------------------------
         if (transform.position.y < -15f)
             transform.position = Vector3.zero;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && Stamina >0)
         {
+            playerStat.StaminaCost(); 
+            Debug.Log(Stamina);
             speed = runningSpeed;
             PaladinAnimation.SetFloat("Horizontal", horizontal);
             PaladinAnimation.SetFloat("Vertical", vertical);
 
         }
         else
-            speed = WalkingSpeed;
+            
+        
+           playerStat.StaminaRegeneration();
+        
+        speed = WalkingSpeed;
         PaladinAnimation.SetFloat("Horizontal", horizontal);
         PaladinAnimation.SetFloat("Vertical", vertical);
     }
@@ -67,4 +77,6 @@ public class CharacterMovements : MonoBehaviour
     {        
         rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
     }
+    
 }
+

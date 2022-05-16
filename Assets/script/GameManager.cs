@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
 
     public static GameManager instance;
-    bool Paused;
+    public bool Paused;
     const float spawnZoneX = 6f;
     const float spawnZoneY = 0.6f;
     const float spawnZoneZ = 6f;

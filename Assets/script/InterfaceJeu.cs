@@ -17,9 +17,14 @@ public class InterfaceJeu : MonoBehaviour
     public Text txtBnPotionStamina;
     float Timer;
     public Text txtTimer;
+    public Text GameOver;
     public int NbHealthPotion = 1;
     public int NbManaPotion =1;
     public int NbStaminaPotion=1 ;
+    public Slider StaminaBar;
+    public Slider ManaBar;
+    public Slider HealthBar;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +32,7 @@ public class InterfaceJeu : MonoBehaviour
         HealingButton.onClick.AddListener(HealingButtonClicked);
         StaminaButton.onClick.AddListener(StaminaButtonClicked);
         playerStat = FindObjectOfType<PlayerStat>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -40,6 +46,12 @@ public class InterfaceJeu : MonoBehaviour
         txtBnPotionHealing.text = NbHealthPotion.ToString();
         txtBnPotionMana.text = NbManaPotion.ToString();
         txtBnPotionStamina.text = NbStaminaPotion.ToString();
+        ManaBar.value = playerStat.mana;
+        ManaBar.maxValue = playerStat.manaMax;
+        StaminaBar.maxValue = playerStat.StaminaMax;
+        HealthBar.maxValue = playerStat.HpMax;
+        StaminaBar.value = playerStat.Stamina;
+        HealthBar.value = playerStat.Hp;
     }
     public void ManaButtonClicked()
     {
@@ -67,6 +79,14 @@ public class InterfaceJeu : MonoBehaviour
             AnimationStamina.Play();
         playerStat.StaminaHealing();
             NbStaminaPotion--;
+        }
+    
+    }
+    public void IsGameOver()
+    {
+        if (gameManager.isGameOver)
+        {
+            GameOver.gameObject.SetActive(true);
         }
     }
 }

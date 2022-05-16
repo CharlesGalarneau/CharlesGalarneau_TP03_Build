@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
-    float Hp ;
-    float Attack;
-    float Defence;
-    float mana;
-    float Stamina;
-    int HpMax = 25;
-    int manaMax = 25;
-    int StaminaMax = 25;
+    public float Hp = 25;
+    public float Attack =1;
+    public float Defence;
+    public float mana = 25;
+   public float Stamina= 25;
+    public int HpMax = 25;
+    public int manaMax = 25;
+    public int StaminaMax = 25;
+    public float staminaRunning = 5f;
     Animator animator;
     public AudioSource Deathsound;
+    public float foix;
+    public float StaminaRegen =.25f;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        Hp = 5;
+        Hp = 25;
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class PlayerStat : MonoBehaviour
     public void PlayerLoseLife()
     {
         Hp--;
-        
+        Debug.Log(Hp);
         if (Hp <= 0)
         {
             PlayerDead();
@@ -38,6 +41,7 @@ public class PlayerStat : MonoBehaviour
             FindObjectOfType<GameManager>().GameOver();
             
         }
+       
     }
     public void HealthHealing()
     {
@@ -71,6 +75,14 @@ public class PlayerStat : MonoBehaviour
     {
         animator.SetBool("IsDead", true);
         Deathsound.Play();
+    }
+    public void StaminaRegeneration()
+    {
+        Stamina += StaminaRegen * Time.deltaTime;
+    }
+    public void StaminaCost()
+    {
+        Stamina -=staminaRunning * Time.deltaTime;
     }
 
 }

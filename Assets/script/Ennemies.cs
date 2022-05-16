@@ -9,16 +9,17 @@ public class Ennemies : MonoBehaviour
 
     NavMeshAgent agent;
     GameObject Weapon;
-    int hitpoints;
+    float hitpoints;
     Animator Animator;
-    
+    PlayerStat playerStat;
+    public float foixgagne =5;
 
     void Start()
     {
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
         hitpoints = Random.Range(2, 6);
 
-      
+        playerStat = FindObjectOfType<PlayerStat>();
     }
 
     // Le zombie se fait assigné sa cible (le joueur)
@@ -41,8 +42,10 @@ public class Ennemies : MonoBehaviour
     void UpdateDestination()
     {
         // Si le jeu est finit, on ne fait rien
-        //if (GameManager.instance.isGameOver)
-            //return;
+        if (GameManager.instance.isGameOver)
+            return;
+        if (GameManager.instance.Paused)
+            return;
 
         // Ajuster la cible
         agent.SetDestination(target.position);
@@ -63,6 +66,7 @@ public class Ennemies : MonoBehaviour
             if (item.name == "Player")
             {
                 Animator.SetBool("IsAttacking", true);
+                
                 Debug.Log(Animator.GetBool("IsAttacking"));
                 FindObjectOfType<GameManager>().TakeDamage();
             }
@@ -77,7 +81,7 @@ public class Ennemies : MonoBehaviour
     // Skelete s'est fait tiré
     public void Hit()
     {
-        hitpoints--;
+        hitpoints-= playerStat.Attack;
 
         if (hitpoints <= 0)
             Die();
@@ -87,6 +91,7 @@ public class Ennemies : MonoBehaviour
     public void Die()
     {
         CancelInvoke("UpdateDestination");
+        playerStat.foix += foixgagne;
         Destroy(gameObject);
     }
    
