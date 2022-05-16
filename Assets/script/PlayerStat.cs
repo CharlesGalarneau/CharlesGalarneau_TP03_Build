@@ -13,6 +13,7 @@ public class PlayerStat : MonoBehaviour
     int manaMax = 25;
     int StaminaMax = 25;
     Animator animator;
+    public AudioSource Deathsound;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class PlayerStat : MonoBehaviour
     public void PlayerLoseLife()
     {
         Hp--;
+        
         if (Hp <= 0)
         {
             PlayerDead();
@@ -68,6 +70,7 @@ public class PlayerStat : MonoBehaviour
     public void PlayerDead()
     {
         animator.SetBool("IsDead", true);
+        Deathsound.Play();
     }
 
 }

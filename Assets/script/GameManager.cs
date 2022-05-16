@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
 
     public static GameManager instance;
+    bool Paused;
     const float spawnZoneX = 6f;
     const float spawnZoneY = 0.6f;
     const float spawnZoneZ = 6f;
     public GameObject prefabSkeleton;
     public Transform player;
     public Transform spawnLocation;
-
+    public InterfaceMenu interfaceMenu;
     
     public GameObject txtGameOver;
     float spawnInterval = 5f;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         StartCoroutine(Spawner());
         instance = this;
     }
@@ -30,7 +32,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("P pressed");
+            interfaceMenu.OuvertureMenu();
+        }
     }
   
 
@@ -74,5 +80,9 @@ public class GameManager : MonoBehaviour
 
         
     }
-
+    public void PauseJeu()
+    {
+        Paused = true;
+        
+    }
 }
