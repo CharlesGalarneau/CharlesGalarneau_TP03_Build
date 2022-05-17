@@ -338,6 +338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  foixgagne: 5
+  SkeletonAttack: 1
+  NbRound: 1
+  Gamemanager: {fileID: 0}
 --- !u!54 &323750690849054541
 Rigidbody:
   m_ObjectHideFlags: 0

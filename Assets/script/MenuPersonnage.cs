@@ -24,16 +24,27 @@ public class MenuPersonnage : MonoBehaviour
     public Text TextSpeed;
     public Text TextMaxHealth;
     public Text TextMaxMana;
-    public Text TestMaxStamina;
+    public Text TextMaxStamina;
+    public Text TextDefence;
+    public Button UpgradeDefence;
+    public CalculStat Calculstat;
+    public Text TextCoutDefence;
+    public Text TextCoutMaxStamina;
+    public Text TextCoutMaxHealth;
+    public Text TextCoutMaxMana;
+    public Text TextCoutSpeed;
+    public Text TextCoutAttack;
     // Start is called before the first frame update
     void Start()
     {
         //gameManager = FindObjectOfType<GameManager>();
         Playerstat = FindObjectOfType<PlayerStat>();
+        Calculstat = FindObjectOfType<CalculStat>();
         Interfacejeu = FindObjectOfType<InterfaceJeu>();
         Retouraujeu.onClick.AddListener(FermetureMenu);
         UpgradeSpeed.onClick.AddListener(UpgradeSpeedButton);
         UpgradeAttack.onClick.AddListener(UpgradeAttackButton);
+        UpgradeDefence.onClick.AddListener(UpgradeDefenceButton);
         UpgradeMaxMana.onClick.AddListener(UpgradeMaxManaButton);
         UpgradeMaxStamina.onClick.AddListener(UpgradeMaxStaminaButton);
         UpgradeMaxHp.onClick.AddListener(UpgradeMaxHealthButton);
@@ -54,6 +65,17 @@ public class MenuPersonnage : MonoBehaviour
         TextFoix.text = Playerstat.foix.ToString();
         TextFoix.text = Playerstat.foix.ToString();
         TextMaxStamina.text = Playerstat.StaminaMax.ToString();
+        TextMaxHealth.text = Playerstat.HpMax.ToString();
+        TextMaxMana.text = Playerstat.manaMax.ToString();
+        TextAttaque.text = Playerstat.Attack.ToString();
+        TextDefence.text = Playerstat.Defence.ToString();
+        TextSpeed.text = Playerstat.WalkingSpeed.ToString();
+        TextCoutSpeed.text = Calculstat.coutfoixSpeed.ToString();
+        TextCoutMaxMana.text = Calculstat.coutfoixManaMax.ToString();
+        TextCoutMaxHealth.text = Calculstat.coutfoixHealhMax.ToString();
+        TextCoutMaxStamina.text = Calculstat.coutfoixStaminaMax.ToString();
+        TextCoutAttack.text = Calculstat.coutfoixAttack.ToString();
+        TextCoutDefence.text = Calculstat.coutfoixDefence.ToString();
     }
     void FermetureMenu()
     {
@@ -67,30 +89,45 @@ public class MenuPersonnage : MonoBehaviour
     }
     public void UpgradeSpeedButton()
     {
-        Playerstat.UpgradeSpeed();
+        if (foix >= Calculstat.coutfoixSpeed)
+        {
+            Playerstat.UpgradeSpeed();
+        Calculstat.SpeedUpgradeValueCost();
         UpgradeSound.Play();
     }
+}
     public void UpgradeMaxHealthButton()
     {
-        
-        Playerstat.UpgradeMaxHp();
+        if (foix >= Calculstat.coutfoixHealhMax)
+        {
+            Playerstat.UpgradeMaxHp();
         UpgradeSound.Play();
     }
+}
     public void UpgradeMaxManaButton()
     {
-        Playerstat.UpgradeMaxMana();
+        if (foix >= Calculstat.coutfoixManaMax)
+        {
+            Playerstat.UpgradeMaxMana();
         UpgradeSound.Play();
     }
+}
     public void UpgradeMaxStaminaButton()
     {
-        Playerstat.UpgradeMaxStamina();
+        if (foix >= Calculstat.coutfoixStaminaMax)
+        {
+            Playerstat.UpgradeMaxStamina();
         UpgradeSound.Play();
     }
+}
     public void UpgradeAttackButton()
     {
-        Playerstat.UpgradeAttack();
+        if (foix >=Calculstat.coutfoixAttack)
+        {
+            Playerstat.UpgradeAttack();
         UpgradeSound.Play();
     }
+}
     public void BuyheatlhPotionButton()
     {
         if (foix >=5)
@@ -113,6 +150,14 @@ public class MenuPersonnage : MonoBehaviour
             {
                 Interfacejeu.StaminaPotionBuy();
                 UpgradeSound.Play();
+        }
+    }
+    public void UpgradeDefenceButton()
+    {
+        if (foix >= Calculstat.coutfoixDefence)
+        {
+            Playerstat.Upgradedefence();
+        UpgradeSound.Play();
         }
     }
 }

@@ -13,13 +13,23 @@ public class Ennemies : MonoBehaviour
     Animator Animator;
     PlayerStat playerStat;
     public float foixgagne =5;
+    public float SkeletonAttack;
+    public int NbRound =1;
+    public GameManager Gamemanager;
 
     void Start()
     {
+        Gamemanager = FindObjectOfType<GameManager>();
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
         hitpoints = Random.Range(2, 6);
 
         playerStat = FindObjectOfType<PlayerStat>();
+    }
+    private void Update()
+    {
+        NbRound = Gamemanager.NbRound;
+        SkeletonAttack = NbRound * 5;
+        foixgagne = NbRound * 5;
     }
 
     // Le zombie se fait assigné sa cible (le joueur)

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Transform player;
     public Transform spawnLocation;
     public InterfaceMenu interfaceMenu;
+    public int NbRound =1;
     
     public GameObject txtGameOver;
     float spawnInterval = 5f;
