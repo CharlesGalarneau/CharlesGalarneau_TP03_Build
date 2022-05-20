@@ -114,7 +114,8 @@ public class InterfaceJeu : MonoBehaviour
     {
         if (gameManager.isGameOver)
         {
-            GameOver.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+           
         }
     }
     public void MenuPersonnageButtonClicked()

@@ -22,11 +22,13 @@ public class CharacterMovements : MonoBehaviour
     public float Stamina;
     public float StaminaCost =2.5f;
     public bool Isrunning;
-
+    public bool IsGameOver;
+    public GameManager Gamemanager;
     float vertical, horizontal;
 
     void Awake()
     {
+        Gamemanager = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody>();
         PaladinAnimation = GetComponent<Animator>();
        
@@ -35,7 +37,8 @@ public class CharacterMovements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Gamemanager.isGameOver == false)
+        { 
         playerStat = FindObjectOfType<PlayerStat>();
         Stamina = playerStat.Stamina;
         WalkingSpeed = playerStat.WalkingSpeed;
@@ -47,8 +50,8 @@ public class CharacterMovements : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
 
         // Déplacements
-        moveDirection = cubeCamera.forward * vertical;
-        moveDirection += cubeCamera.right * horizontal;
+        moveDirection = transform.forward * vertical;
+        moveDirection += transform.right * horizontal;
 
         // animations des mouvements pour le personage pricipale
         PaladinAnimation.SetFloat("Horizontal", horizontal);
@@ -75,6 +78,11 @@ public class CharacterMovements : MonoBehaviour
         speed = WalkingSpeed;
         PaladinAnimation.SetFloat("Horizontal", horizontal);
         PaladinAnimation.SetFloat("Vertical", vertical);
+          }
+        else
+        {
+            return;
+        }
     }
 
 

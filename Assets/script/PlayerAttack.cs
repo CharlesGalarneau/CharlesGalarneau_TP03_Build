@@ -34,13 +34,13 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1) && IsAttackingHeavy && IsAttackingUnarmed)
         {
-            ChargeHeavy = 1;
+           // ChargeHeavy = 1;
 
-            StartCoroutine(HeavyDelay());
-            if (Input.GetMouseButtonUp(1) && ChargeHeavy == 0)
-            {
+            //StartCoroutine(HeavyDelay());
+            //if (Input.GetMouseButtonUp(1) && ChargeHeavy == 0)
+            //{
                 AttackHeavyUnarmed();
-            }
+            //}
         }
         if (Input.GetMouseButtonDown(0) && IsAttackingLight && IsAttackingUnarmed)
         {

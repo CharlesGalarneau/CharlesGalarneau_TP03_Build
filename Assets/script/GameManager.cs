@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool Paused;
     const float spawnZoneX = 6f;
-    const float spawnZoneY = 0.6f;
+    const float spawnZoneY = 0f;
     const float spawnZoneZ = 6f;
     public GameObject prefabSkeleton;
     public Transform player;
@@ -19,14 +19,19 @@ public class GameManager : MonoBehaviour
     
     public GameObject txtGameOver;
     float spawnInterval = 5f;
+    public InterfaceJeu Interfacejeu;
+    public bool IsRoundOver;
 
     public bool isGameOver = false; //{ get; private set; }=false;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        Interfacejeu = FindObjectOfType<InterfaceJeu>();
+        if (IsRoundOver == false) 
+        { 
         StartCoroutine(Spawner());
+        }
         instance = this;
     }
     
@@ -46,6 +51,10 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            for (int i = 0; i < NbRound; i++)
+            {
+
+           
             // Déterminer la position du zombie
             Vector3 location = new Vector3(Random.Range(-spawnZoneX, spawnZoneX), spawnZoneY, Random.Range(-spawnZoneZ, spawnZoneZ));
 
@@ -67,6 +76,7 @@ public class GameManager : MonoBehaviour
 
             if (spawnInterval < 1f)
                 spawnInterval = 1f;
+            }
         }
 
     }
@@ -78,7 +88,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
-
+        Interfacejeu.IsGameOver();
+        StopAllCoroutines();
         
     }
     public void PauseJeu()
@@ -91,4 +102,11 @@ public class GameManager : MonoBehaviour
         Paused = false;
 
     }
-}
+
+    public void EndRound()
+    { if (IsRoundOver)
+        {
+            NbRound++;
+        }
+    }
+}   

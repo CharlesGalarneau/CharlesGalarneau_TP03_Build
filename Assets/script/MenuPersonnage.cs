@@ -91,7 +91,7 @@ public class MenuPersonnage : MonoBehaviour
     {
         if (foix >= Calculstat.coutfoixSpeed)
         {
-            Playerstat.UpgradeSpeed();
+        Playerstat.UpgradeSpeed();
         Calculstat.SpeedUpgradeValueCost();
         UpgradeSound.Play();
     }
@@ -101,7 +101,8 @@ public class MenuPersonnage : MonoBehaviour
         if (foix >= Calculstat.coutfoixHealhMax)
         {
             Playerstat.UpgradeMaxHp();
-        UpgradeSound.Play();
+            Calculstat.HealthMaxUpgradeValueCost();
+            UpgradeSound.Play();
     }
 }
     public void UpgradeMaxManaButton()
@@ -109,6 +110,7 @@ public class MenuPersonnage : MonoBehaviour
         if (foix >= Calculstat.coutfoixManaMax)
         {
             Playerstat.UpgradeMaxMana();
+            Calculstat.ManaMaxUpgradeValueCost();
         UpgradeSound.Play();
     }
 }
@@ -117,6 +119,7 @@ public class MenuPersonnage : MonoBehaviour
         if (foix >= Calculstat.coutfoixStaminaMax)
         {
             Playerstat.UpgradeMaxStamina();
+            Calculstat.StaminaMaxUpgradeValueCost();
         UpgradeSound.Play();
     }
 }
@@ -125,7 +128,9 @@ public class MenuPersonnage : MonoBehaviour
         if (foix >=Calculstat.coutfoixAttack)
         {
             Playerstat.UpgradeAttack();
+            Calculstat.AttackUpgradeValueCost();
         UpgradeSound.Play();
+            
     }
 }
     public void BuyheatlhPotionButton()
@@ -157,6 +162,7 @@ public class MenuPersonnage : MonoBehaviour
         if (foix >= Calculstat.coutfoixDefence)
         {
             Playerstat.Upgradedefence();
+            Calculstat.DefenceUpgradeValueCost();
         UpgradeSound.Play();
         }
     }
