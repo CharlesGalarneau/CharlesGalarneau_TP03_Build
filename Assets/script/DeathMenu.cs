@@ -26,7 +26,7 @@ public class DeathMenu : MonoBehaviour
     void Update()
     {
 
-        if (Gamemanager.isGameOver)
+        if (Gamemanager.isGameOver ==true)
         {
             OuvertureMenu();
         }

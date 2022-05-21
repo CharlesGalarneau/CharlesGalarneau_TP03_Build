@@ -63,7 +63,7 @@ public class CharacterMovements : MonoBehaviour
         {
             playerStat.StaminaCost(); 
            
-            Debug.Log(Stamina);
+          
             Isrunning = true;
             speed = WalkingSpeed *2;
             PaladinAnimation.SetFloat("Horizontal", horizontal);

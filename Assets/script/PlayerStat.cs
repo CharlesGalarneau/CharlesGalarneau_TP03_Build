@@ -22,6 +22,8 @@ public class PlayerStat : MonoBehaviour
     public Ennemies ennemies;
     public CalculStat Calculstat;
     private float AttackValue;
+    public bool Isinvincible = false;
+    public float InvincibilityTimer = 15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,20 +44,32 @@ public class PlayerStat : MonoBehaviour
     void Update() 
     {
         ennemies = FindObjectOfType<Ennemies>();
+        Debug.Log(InvincibilityTimer);
+        if  (InvincibilityTimer <= 1f)
+        { Isinvincible = false;
+            StopCoroutine(InvincibilityTimerF());
+        }
     }
     public void PlayerLoseLife()
     {
-        Hp -=  ennemies.SkeletonAttack - Defence;
-       
+        if (Isinvincible == true)
+        {
+            return;
+        }
+        else
+        { 
+            Hp -= ennemies.SkeletonAttack - Defence;
+
         Debug.Log(Hp);
         if (Hp <= 0)
         {
             PlayerDead();
             Debug.Log("Oof");
             FindObjectOfType<GameManager>().GameOver();
-            
+
         }
-       
+        }
+
     }
     public void HealthHealing()
     {
@@ -136,4 +150,22 @@ public class PlayerStat : MonoBehaviour
         Defence += 1;
         foix -= Calculstat.coutfoixDefence;
     }
+    public void IsinvicibleSpell()
+    {
+        Isinvincible = true;
+        InvincibilityTimer = 15f;
+        StartCoroutine(InvincibilityTimerF());
+    }
+    IEnumerator InvincibilityTimerF()
+    {
+        for (float i = InvincibilityTimer;  i >= 0f; i-=Time.deltaTime)
+        {
+            InvincibilityTimer = i;
+            Debug.Log(i);
+            yield return InvincibilityTimer;
+        }
+       
+       // yield return new WaitForSeconds(0f);
+    }
+
 }

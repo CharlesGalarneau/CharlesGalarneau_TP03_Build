@@ -28,11 +28,20 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Keypad1))// && playerstat.mana >=20 )
+        if (Input.GetKeyDown(KeyCode.Keypad1) && playerstat.mana >=20 )
         {
             
             MagicMissileAttack();
             playerspell.SpellMagicMissile();
+            playerstat.ManaMagicMissileCost();
+            //Animator.SetBool("IsCasting", false);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2) && playerstat.mana >= 20)
+        {
+
+            MagicMissileAttack();
+            playerspell.FaithShield();
+            playerstat.ManaMagicMissileCost();
             //Animator.SetBool("IsCasting", false);
         }
         if (Input.GetMouseButtonDown(0) && IsAttackingUnarmed && IsAttackingLight)
@@ -79,6 +88,11 @@ public class PlayerAttack : MonoBehaviour
 
         }
         if (Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            Animator.SetBool("IsCasting", false);
+
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad2))
         {
             Animator.SetBool("IsCasting", false);
 

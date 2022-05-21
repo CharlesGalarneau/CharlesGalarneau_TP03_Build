@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerSpell : MonoBehaviour
 {
     public PlayerStat Playerstat;
-    public float CoutMagicMissile = 20;
+    public float CoutMagicMissile = 5;
     public MagicMissile Magicmissile;
     public Transform Castpoints;
     public GameObject MagicMissileObject;
+    public Ennemies ennemies;
+    public AudioSource Sonmagie;
+    public float CoutfoixShield = 20f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,18 +23,20 @@ public class PlayerSpell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ennemies = FindObjectOfType<Ennemies>();
     }
 
     public void SpellMagicMissile()
     {
+       
+        
         if (Playerstat.mana >= CoutMagicMissile)
         {
             GameObject projectile = Instantiate(MagicMissileObject, Castpoints.position, Castpoints.rotation);
             MagicMissile bullet = projectile.GetComponent<MagicMissile>();
-            //bullet.ReachEnnemies(Ennemies);
-            //audioSource.PlayOneShot(Son, 0.5f);
-            //AnimationTir.Play();
+            //bullet.ReachEnnemies(ennemies.transform);
+            Sonmagie.Play();
+
 
         }
     }
@@ -39,4 +44,13 @@ public class PlayerSpell : MonoBehaviour
     {
 
     }
+    public void FaithShield()
+    {
+        if (Playerstat.mana >= CoutfoixShield)
+        {
+            Playerstat.IsinvicibleSpell();
+        }
+    }
+    public void CoutFaithShield()
+    { }
 }

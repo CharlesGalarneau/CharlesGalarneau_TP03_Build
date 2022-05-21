@@ -7,7 +7,7 @@ public class Ennemies : MonoBehaviour
 {
     public Transform target;
 
-    NavMeshAgent agent;
+    public static NavMeshAgent agent;
     GameObject Weapon;
     float hitpoints;
     Animator Animator;
@@ -17,6 +17,8 @@ public class Ennemies : MonoBehaviour
     public int NbRound =1;
     public GameManager Gamemanager;
     int attacksCooldown = 5;
+    bool IsAttacking;
+    public static bool IsinRange =false;
 
     void Start()
     {
@@ -45,7 +47,9 @@ public class Ennemies : MonoBehaviour
         InvokeRepeating("UpdateDestination", 0.1f, 1f);
 
         // À toutes les 0.5s, le zombie vérifie si le joueur est a proximité (si oui, c'est game over)
-        InvokeRepeating("PlayerProximityCheck", 0.1f, 0.5f);
+        InvokeRepeating("PlayerProximityCheck", 0.1f, 0.25f);
+        Animator.SetFloat("Horizontal", 1f);
+        Animator.SetFloat("Vertical", 1f);
         UpdateDestination();
        
     }
@@ -76,17 +80,25 @@ public class Ennemies : MonoBehaviour
             // Si l'un des collider est celui du joueur, il meurt
             if (item.name == "Player")
             {
-                Animator.SetBool("IsAttacking", true);
-                 
-                Debug.Log(Animator.GetBool("IsAttacking"));
+
+
+                
+                Animator.SetFloat("Horizontal", 0f);
+                Animator.SetFloat("Vertical", 0f);
+                
+                StartCoroutine(Attacks());
+                
+                StopCoroutine(Attacks());
                 Attack();
                 
             }
-            
             else
             {
-                Animator.SetBool("IsAttacking", false);
+                Animator.SetFloat("Horizontal", 1f);
+                Animator.SetFloat("Vertical", 1f);
+                
             }
+           
         }
     }
 
@@ -109,12 +121,30 @@ public class Ennemies : MonoBehaviour
     public void Attack()
     {
         if (attacksCooldown == 0)
-        { 
+        {
+            if (IsAttacking)
+               
             FindObjectOfType<GameManager>().TakeDamage();
-        attacksCooldown = 5;
+            attacksCooldown = 5;
         }
         else
             attacksCooldown--;
     }
+    IEnumerator Attacks()
+    {
+        if (attacksCooldown == 0)
+        {
+
+            Animator.SetBool("IsAttacking", true);
+            yield return new WaitForSeconds(1f); 
+            IsAttacking = true;
+            yield return new WaitForSeconds(.1f);
+            Animator.SetBool("IsAttacking", false);
+            IsAttacking = false;
+            yield return new WaitForSeconds(.1f);
+        }
+
+    }
+    
    
 }
