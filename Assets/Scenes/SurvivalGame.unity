@@ -25944,6 +25944,8 @@ MonoBehaviour:
   WalkingSpeed: 2.5
   ennemies: {fileID: 0}
   Calculstat: {fileID: 0}
+  Isinvincible: 0
+  InvincibilityTimer: 30
 --- !u!114 &5064258196299866161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25995,6 +25997,9 @@ MonoBehaviour:
   Magicmissile: {fileID: 0}
   Castpoints: {fileID: 400047588}
   MagicMissileObject: {fileID: 1080521826109874277, guid: 900c1af13b0980e4aa4450b52b77450d, type: 3}
+  ennemies: {fileID: 0}
+  Sonmagie: {fileID: 5064258196299866168}
+  CoutfoixShield: 20
 --- !u!82 &5064258196299866164
 AudioSource:
   m_ObjectHideFlags: 0
