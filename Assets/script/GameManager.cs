@@ -27,11 +27,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StopPauseJeu();
         Interfacejeu = FindObjectOfType<InterfaceJeu>();
         if (IsRoundOver == false) 
-        { 
-        StartCoroutine(Spawner());
+        {
+            for (int i = 0; i < NbRound *2; i++)
+                StartCoroutine(Spawner());
         }
+        StopCoroutine(Spawner());
         instance = this;
     }
     
@@ -49,10 +52,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Spawner()
     {
-        while (true)
+       // while (true)
         {
-            for (int i = 0; i < NbRound; i++)
-            {
+            
+            
 
            
             // Déterminer la position du zombie
@@ -75,8 +78,8 @@ public class GameManager : MonoBehaviour
             spawnInterval -= 0.25f;
 
             if (spawnInterval < 1f)
-                spawnInterval = 1f;
-            }
+                spawnInterval = 2.5f;
+            
         }
 
     }
@@ -94,12 +97,13 @@ public class GameManager : MonoBehaviour
     }
     public void PauseJeu()
     {
+        Time.timeScale = 0;
         Paused = true;
-        
     }
     public void StopPauseJeu()
     {
         Paused = false;
+        Time.timeScale = 1;
 
     }
 

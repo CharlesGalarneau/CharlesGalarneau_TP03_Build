@@ -16,6 +16,7 @@ public class Ennemies : MonoBehaviour
     public float SkeletonAttack;
     public int NbRound =1;
     public GameManager Gamemanager;
+    int attacksCooldown = 5;
 
     void Start()
     {
@@ -76,9 +77,10 @@ public class Ennemies : MonoBehaviour
             if (item.name == "Player")
             {
                 Animator.SetBool("IsAttacking", true);
-                
+                 
                 Debug.Log(Animator.GetBool("IsAttacking"));
-                FindObjectOfType<GameManager>().TakeDamage();
+                Attack();
+                
             }
             
             else
@@ -92,7 +94,7 @@ public class Ennemies : MonoBehaviour
     public void Hit()
     {
         hitpoints-= playerStat.Attack;
-
+        Debug.Log("Dommage Taken");
         if (hitpoints <= 0)
             Die();
     }
@@ -103,6 +105,16 @@ public class Ennemies : MonoBehaviour
         CancelInvoke("UpdateDestination");
         playerStat.foix += foixgagne;
         Destroy(gameObject);
+    }
+    public void Attack()
+    {
+        if (attacksCooldown == 0)
+        { 
+            FindObjectOfType<GameManager>().TakeDamage();
+        attacksCooldown = 5;
+        }
+        else
+            attacksCooldown--;
     }
    
 }

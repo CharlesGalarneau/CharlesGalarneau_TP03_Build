@@ -101,6 +101,10 @@ public class PlayerStat : MonoBehaviour
     {
         Stamina -=staminaRunning * Time.deltaTime;
     }
+    public void ManaMagicMissileCost()
+    {
+        mana -= 20;
+    }
     public void UpgradeSpeed()
     {
         WalkingSpeed += WalkingSpeed * .05f;

@@ -14,9 +14,13 @@ public class PlayerAttack : MonoBehaviour
     public GameObject PunchPoints;
     public Animator Animator;
     public int ChargeHeavy = 0;
+    public PlayerSpell playerspell;
+    public PlayerStat playerstat;
     // Start is called before the first frame update;
     void Start()
     {
+        playerspell = FindObjectOfType<PlayerSpell>();
+        playerstat = FindObjectOfType<PlayerStat>();
         Animator = GetComponent<Animator>();
     }
 
@@ -24,7 +28,13 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
 
-
+        if (Input.GetKeyDown(KeyCode.Keypad1))// && playerstat.mana >=20 )
+        {
+            
+            MagicMissileAttack();
+            playerspell.SpellMagicMissile();
+            //Animator.SetBool("IsCasting", false);
+        }
         if (Input.GetMouseButtonDown(0) && IsAttackingUnarmed && IsAttackingLight)
         {
 
@@ -61,6 +71,18 @@ public class PlayerAttack : MonoBehaviour
             Animator.SetBool("IsAttackingHeavy", false);
             
         }
+        if (Input.GetMouseButtonUp(1))
+        {
+            Animator.SetBool("IsAttackingLight", false);
+            Animator.SetBool("IsEquipt", false);
+            Animator.SetBool("IsAttackingHeavy", false);
+
+        }
+        if (Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            Animator.SetBool("IsCasting", false);
+
+        }
 
     }
     IEnumerator HeavyDelay()
@@ -93,16 +115,12 @@ public class PlayerAttack : MonoBehaviour
         Animator.SetBool("IsEquipt", true);
         StopCoroutine(HeavyDelay());
     }
-    private void OnTriggerEnter(Collider other)
+    void MagicMissileAttack()
     {
-        if (other.CompareTag("Ennemies"))
-        {
-
-            Ennemies ennemies = other.GetComponent<Ennemies>();
-            FindObjectOfType<Ennemies>().Hit();
-            
-        }
+        Animator.SetBool("IsCasting", true);
+        
     }
+
 }
     
 

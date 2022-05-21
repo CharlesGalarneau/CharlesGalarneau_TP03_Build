@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InterfaceMenu : MonoBehaviour
 {
     public GameManager Gamemanager;
     public Button Retouraujeu;
     public Button Option;
+    public Button QuitterJeu;
     public MenuVolume menuVolume;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,7 @@ public class InterfaceMenu : MonoBehaviour
 
         Retouraujeu.onClick.AddListener(FermetureMenu) ;
         Option.onClick.AddListener(OvertureOption);
+        QuitterJeu.onClick.AddListener(QuitterJeuMenu);
         gameObject.SetActive(false);
        
     }
@@ -28,8 +31,9 @@ public class InterfaceMenu : MonoBehaviour
     }
     public void FermetureMenu()
     {
-        gameObject.SetActive(false);
         Gamemanager.StopPauseJeu();
+        gameObject.SetActive(false);
+       
     }
     public void OvertureOption()
     {
@@ -39,5 +43,11 @@ public class InterfaceMenu : MonoBehaviour
     {
         Gamemanager.PauseJeu();
         gameObject.SetActive(true);
+    }
+    public void QuitterJeuMenu()
+    {
+        SceneManager.LoadScene("Intro");
+        //a changer la scene pour activer le main menu
+
     }
 }
