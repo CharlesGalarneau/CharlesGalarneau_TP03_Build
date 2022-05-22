@@ -14,14 +14,14 @@ public class Attackpoints : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ennemies ennemies = Hitennemies.GetComponent<Ennemies>();
+        Ennemies ennemies = GetComponent<Ennemies>();
     }
     private void OnTriggerEnter()
     {
 
-        if (Hitennemies.CompareTag("Ennemies"))
+        if (Hitennemies.CompareTag("ennemies"))
         {
-
+            Debug.Log("FIUCKER");
             
             FindObjectOfType<Ennemies>().Hit();
 

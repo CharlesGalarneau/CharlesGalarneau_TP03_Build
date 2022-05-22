@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 80a39193aa4df4be8b7434a05e9f2761, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c11b4b87697f62c4c9af448d24bb16c7, type: 2}
 --- !u!1 &24618737
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +528,6 @@ GameObject:
   m_Component:
   - component: {fileID: 128668274}
   - component: {fileID: 128668275}
-  - component: {fileID: 128668276}
   m_Layer: 0
   m_Name: colliderPunch
   m_TagString: Untagged
@@ -546,7 +545,8 @@ Transform:
   m_LocalRotation: {x: -0.70708394, y: -0.00000021216194, z: -0.00000032221493, w: 0.7071297}
   m_LocalPosition: {x: -0.05, y: 0.088, z: 0.02}
   m_LocalScale: {x: 0.31662562, y: 0.2074399, z: 0.8840831}
-  m_Children: []
+  m_Children:
+  - {fileID: 1044604001}
   m_Father: {fileID: 489405259}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -558,24 +558,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128668273}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &128668276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128668273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c22ecb3cf12ad2d4a9f9e280c8b66084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hitennemies: {fileID: 6845198042255773950, guid: 7b0e5ad4d2aed479ca4c58599ffa60cc, type: 3}
 --- !u!1 &164617197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &500311767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2976,6 +2963,7 @@ MonoBehaviour:
   txtGameOver: {fileID: 831179097}
   Interfacejeu: {fileID: 0}
   IsRoundOver: 0
+  nbEnnemies: 0
   isGameOver: 0
 --- !u!4 &761940130
 Transform:
@@ -5227,6 +5215,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029747369}
   m_CullTransparentMesh: 1
+--- !u!1 &1044604000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1044604001}
+  m_Layer: 0
+  m_Name: Attackpoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1044604001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044604000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0.216}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 128668274}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1061516223
 GameObject:
   m_ObjectHideFlags: 0
@@ -25916,6 +25934,12 @@ MonoBehaviour:
   ChargeHeavy: 0
   playerspell: {fileID: 0}
   playerstat: {fileID: 0}
+  attackpoints: {fileID: 0}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  ennemies: {fileID: 0}
 --- !u!114 &5064258196299866160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26306,6 +26330,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5064258196299866169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064258196299866156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22ecb3cf12ad2d4a9f9e280c8b66084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hitennemies: {fileID: 6845198042255773950, guid: 7b0e5ad4d2aed479ca4c58599ffa60cc, type: 3}
 --- !u!4 &5551824895574293142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4758613940171398004, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}

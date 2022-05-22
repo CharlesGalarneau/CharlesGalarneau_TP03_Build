@@ -16,18 +16,23 @@ public class PlayerAttack : MonoBehaviour
     public int ChargeHeavy = 0;
     public PlayerSpell playerspell;
     public PlayerStat playerstat;
+    public Transform attackpoints;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+    public Ennemies ennemies;
     // Start is called before the first frame update;
     void Start()
     {
         playerspell = FindObjectOfType<PlayerSpell>();
         playerstat = FindObjectOfType<PlayerStat>();
         Animator = GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        ennemies = GetComponent<Ennemies>();
         if (Input.GetKeyDown(KeyCode.Keypad1) && playerstat.mana >=20 )
         {
             
@@ -110,11 +115,22 @@ public class PlayerAttack : MonoBehaviour
     {
         Animator.SetBool("IsAttackingLight", true);
         Animator.SetBool("IsEquipt", false);
+        //Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
+        //foreach (Collider collider in colliders)
+        //{
+            
+        //   // Rigidbody rb = collider.GetComponent<Rigidbody>();
+        //    if (rb != null)
+        //    { ennemies.Hit(); }
+        //    else
+        //        return;
+        //}
     }
     void AttackHeavyUnarmed()
     {
         Animator.SetBool("IsAttackingHeavy", true);
         Animator.SetBool("IsEquipt", false);
+        playerstat.heavyAttacks();
         StopCoroutine(HeavyDelay());
     }
     void AttacklightArmed()

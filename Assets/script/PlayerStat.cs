@@ -21,9 +21,10 @@ public class PlayerStat : MonoBehaviour
     public float WalkingSpeed = 2.5f;
     public Ennemies ennemies;
     public CalculStat Calculstat;
-    private float AttackValue;
+    private float AttackValue =1f;
     public bool Isinvincible = false;
     public float InvincibilityTimer = 15f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,7 @@ public class PlayerStat : MonoBehaviour
         Hp = 25;
         mana = 25;
         foix = 25;
+        
     }
     void Awake()
     {
@@ -44,7 +46,7 @@ public class PlayerStat : MonoBehaviour
     void Update() 
     {
         ennemies = FindObjectOfType<Ennemies>();
-        Debug.Log(InvincibilityTimer);
+        
         if  (InvincibilityTimer <= 1f)
         { Isinvincible = false;
             StopCoroutine(InvincibilityTimerF());
@@ -155,6 +157,10 @@ public class PlayerStat : MonoBehaviour
         Isinvincible = true;
         InvincibilityTimer = 15f;
         StartCoroutine(InvincibilityTimerF());
+    }
+    public void heavyAttacks()
+    {
+        Attack = AttackValue * 1.25f;
     }
     IEnumerator InvincibilityTimerF()
     {

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     float spawnInterval = 5f;
     public InterfaceJeu Interfacejeu;
     public bool IsRoundOver;
+    public int nbEnnemies;
 
     public bool isGameOver = false; //{ get; private set; }=false;
     
@@ -29,10 +30,12 @@ public class GameManager : MonoBehaviour
     {
         StopPauseJeu();
         Interfacejeu = FindObjectOfType<InterfaceJeu>();
+        
         if (IsRoundOver == false) 
         {
-            for (int i = 0; i < NbRound *2; i++)
-                StartCoroutine(Spawner());
+
+            StartCoroutine(Spawner());
+
         }
         StopCoroutine(Spawner());
         instance = this;
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
            
@@ -53,11 +57,12 @@ public class GameManager : MonoBehaviour
     IEnumerator Spawner()
     {
        // while (true)
-        {
-            
-            
+       
 
-           
+            for (int i = 0; i < NbRound * 2; i++)
+                
+        {
+
             // Déterminer la position du zombie
             Vector3 location = new Vector3(Random.Range(-spawnZoneX, spawnZoneX), spawnZoneY, Random.Range(-spawnZoneZ, spawnZoneZ));
 
@@ -71,15 +76,11 @@ public class GameManager : MonoBehaviour
 
             // Spawn du zombie
             GameObject obj = Instantiate(prefabSkeleton, location, Quaternion.identity).gameObject;
-
+            nbEnnemies += 1;
             // Dire au zombie de pourchasser le joueur
-            obj.GetComponent<Ennemies>().SetTarget(player);
+            //obj.GetComponent<Ennemies>().SetTarget(player);
 
-            spawnInterval -= 0.25f;
 
-            if (spawnInterval < 1f)
-                spawnInterval = 2.5f;
-            
         }
 
     }
@@ -113,4 +114,9 @@ public class GameManager : MonoBehaviour
             NbRound++;
         }
     }
+    public void DeleteEnnemies()
+    {
+        nbEnnemies--;
+       // Destroy(Ennemies.gameObject);
+            }
 }   
