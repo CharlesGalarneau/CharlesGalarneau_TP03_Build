@@ -227,6 +227,7 @@ MonoBehaviour:
   ennemies: {fileID: 0}
   MaxLifeValue: 0
   LifeBar: {fileID: 1640166997845758374}
+  Gamemanager: {fileID: 0}
 --- !u!1 &4593991178217636736
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2353fc5355e1f405793a7627db222770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 4758613940171398004, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}
   hitpoints: 0
   foixgagne: 5
   SkeletonAttack: 1
@@ -573,6 +574,7 @@ MonoBehaviour:
   NbRound: 1
   Gamemanager: {fileID: 0}
   IsDead: 0
+  Player: {fileID: 5278832866519876046, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}
 --- !u!54 &323750690849054541
 Rigidbody:
   m_ObjectHideFlags: 0

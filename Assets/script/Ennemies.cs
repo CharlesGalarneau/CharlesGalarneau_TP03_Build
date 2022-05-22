@@ -27,8 +27,10 @@ public class Ennemies : MonoBehaviour
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
         Gamemanager = FindObjectOfType<GameManager>();
-        target = Player.transform.Find("Player");
+        //target = Player.transform.Find("Player");
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
         //hitpoints = Random.Range(2, 6);
 
@@ -37,15 +39,16 @@ public class Ennemies : MonoBehaviour
         SkeletonAttack = NbRound * 2;
         SkeletonDefence = NbRound - 1;
         foixgagne = NbRound * 5;
+        if (!IsDead)
+        {
+            SetTarget(target);
+        }
 
         playerStat = FindObjectOfType<PlayerStat>();
     }
     private void Update()
     {
-        if (!IsDead)
-        {
-            SetTarget(target);
-        }
+        
         
     }
 
@@ -53,8 +56,8 @@ public class Ennemies : MonoBehaviour
     public void SetTarget(Transform t)
     {
        
-        agent = GetComponent<NavMeshAgent>();
-        Animator = GetComponent<Animator>();
+        
+       
 
             target = t;
 
@@ -66,9 +69,9 @@ public class Ennemies : MonoBehaviour
         Animator.SetFloat("Horizontal", 1f);
         Animator.SetFloat("Vertical", 1f);
         if (IsDead == false)
-        { 
-        UpdateDestination();
-             }
+        {
+            agent.SetDestination(target.position);
+        }
        
        
 
@@ -81,8 +84,8 @@ public class Ennemies : MonoBehaviour
             return;
         if (GameManager.instance.Paused)
             return;
-        if (IsDead == false)
-            agent.SetDestination(target.position);
+      //  if (IsDead == false) ;
+           
 
         // Ajuster la cible
 
@@ -144,8 +147,8 @@ public class Ennemies : MonoBehaviour
         CancelInvoke("PlayerProximityCheck");
         playerStat.foix += foixgagne;
         Animator.SetBool("Isdead", true);
-        //Destroy(gameObject);
-        //Gamemanager.DeleteEnnemies();
+        Destroy(this.gameObject);
+       // Gamemanager.DeleteEnnemies();
         IsDead =true;
     }
     public void Attack()

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public InterfaceJeu Interfacejeu;
     public bool IsRoundOver;
     public int nbEnnemies;
+    public GameObject obj;
 
     public bool isGameOver = false; //{ get; private set; }=false;
     
@@ -34,10 +35,10 @@ public class GameManager : MonoBehaviour
         if (IsRoundOver == false) 
         {
 
-            StartCoroutine(Spawner());
+            Spawner();
 
         }
-        StopCoroutine(Spawner());
+        Spawner();
         instance = this;
     }
     
@@ -52,38 +53,18 @@ public class GameManager : MonoBehaviour
         }
     }
   
-
-
-    IEnumerator Spawner()
+    public void Spawner()
     {
-       // while (true)
-       
-
-            for (int i = 0; i < NbRound * 2; i++)
-                
-        {
-
-            // Déterminer la position du zombie
+        for (int i = 0; i < NbRound * 2; i++)
+        { 
             Vector3 location = new Vector3(Random.Range(-spawnZoneX, spawnZoneX), spawnZoneY, Random.Range(-spawnZoneZ, spawnZoneZ));
-
-            // Un indicateur circulaire apparaitra à cette position pour que le joueur puisse s'en éloigner
-            Vector3 indicatorLocation = location;
-            indicatorLocation.y = 0.03f;
-            spawnLocation.position = indicatorLocation;
-
-            // Attendre un léger interval avant de le faire spawn
-            yield return new WaitForSeconds(spawnInterval);
-
-            // Spawn du zombie
-            GameObject obj = Instantiate(prefabSkeleton, location, Quaternion.identity).gameObject;
-            nbEnnemies += 1;
-            // Dire au zombie de pourchasser le joueur
-            //obj.GetComponent<Ennemies>().SetTarget(player);
-
-
-        }
-
+             new WaitForSeconds(spawnInterval);
+             obj = Instantiate(prefabSkeleton, location, Quaternion.identity);
+             }
+        nbEnnemies += 1;
     }
+
+   
     public void TakeDamage()
     {
         Debug.Log("player take Damage");
@@ -117,6 +98,6 @@ public class GameManager : MonoBehaviour
     public void DeleteEnnemies()
     {
         nbEnnemies--;
-       // Destroy(Ennemies.gameObject);
+        Destroy(obj.gameObject);
             }
 }   
