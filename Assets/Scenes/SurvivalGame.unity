@@ -6165,7 +6165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 490504, guid: 751682349ef7b8546aff2c104411f6b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.2
+      value: 19.07
       objectReference: {fileID: 0}
     - target: {fileID: 490504, guid: 751682349ef7b8546aff2c104411f6b3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25973,7 +25973,7 @@ MonoBehaviour:
   Isinvincible: 0
   InvincibilityTimer: 30
   AnimationInvisibiity: {fileID: 0}
-  InvisibilitySpell: {fileID: 0}
+  InvisibilitySpell: {fileID: 5064258196299866168}
 --- !u!114 &5064258196299866161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26346,7 +26346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22ecb3cf12ad2d4a9f9e280c8b66084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hitennemies: {fileID: 6845198042255773950, guid: 7b0e5ad4d2aed479ca4c58599ffa60cc, type: 3}
+  Hitennemies: {fileID: 128668275}
 --- !u!4 &5551824895574293142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4758613940171398004, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}

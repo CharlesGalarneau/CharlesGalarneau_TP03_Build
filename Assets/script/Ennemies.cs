@@ -31,10 +31,7 @@ public class Ennemies : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        Animator = GetComponent<Animator>();
-        Gamemanager = FindObjectOfType<GameManager>();
-        ennemies = GetComponent<Ennemies>();
+        
         //target = Player.transform.Find("Player");
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
         //hitpoints = Random.Range(2, 6);
@@ -49,10 +46,19 @@ public class Ennemies : MonoBehaviour
         foixgagne = NbRound * 5;
         
         
-            SetTarget(target);
+           
         
 
         playerStat = FindObjectOfType<PlayerStat>();
+    }
+    private void Awake()
+    {
+
+        agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
+        Gamemanager = FindObjectOfType<GameManager>();
+        ennemies = GetComponent<Ennemies>();
+        SetTarget(target);
     }
     private void Update()
     {

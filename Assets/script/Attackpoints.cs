@@ -18,7 +18,7 @@ public class Attackpoints : MonoBehaviour
     }
     private void OnTriggerEnter(Collider Other)
     {
-
+  
         if (Other.CompareTag("ennemies"))
         {
             Ennemies DeathEnnemies = Other.GetComponent<Ennemies>();
