@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 1833594981018525490}
   - component: {fileID: 2450923063979262649}
   - component: {fileID: 60273300124764376}
-  - component: {fileID: 6294901016500484693}
   m_Layer: 5
   m_Name: LifeBar
   m_TagString: Untagged
@@ -212,22 +211,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6294901016500484693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3800868389685345857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c110f396186d684b91441e762e4d9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ennemies: {fileID: 0}
-  MaxLifeValue: 0
-  LifeBar: {fileID: 1640166997845758374}
-  Gamemanager: {fileID: 0}
 --- !u!1 &4593991178217636736
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4593991178217636752}
   m_LocalRotation: {x: -0, y: 0.73434335, z: -0, w: 0.67877823}
-  m_LocalPosition: {x: -0.77225, y: 1.7674, z: -3.6116}
+  m_LocalPosition: {x: -0.77225, y: 0.5, z: -3.6116}
   m_LocalScale: {x: 0.8115483, y: 0.76753795, z: 0.8115483}
   m_Children:
   - {fileID: 4593991178218069966}
@@ -575,6 +558,9 @@ MonoBehaviour:
   Gamemanager: {fileID: 0}
   IsDead: 0
   Player: {fileID: 5278832866519876046, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}
+  ennemies: {fileID: 0}
+  MaxLifeValue: 0
+  LifeBar: {fileID: 1640166997845758374}
 --- !u!54 &323750690849054541
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -589,7 +575,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &3271107474116475445
 CapsuleCollider:
@@ -600,7 +586,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4593991178217636752}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 1
   m_Direction: 1
@@ -616,7 +602,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3, z: 0.5}
+  m_Size: {x: 0.25, y: 2.75, z: 0.25}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4593991178217636754
 GameObject:

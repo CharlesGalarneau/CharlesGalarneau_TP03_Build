@@ -24,6 +24,8 @@ public class PlayerStat : MonoBehaviour
     private float AttackValue =1f;
     public bool Isinvincible = false;
     public float InvincibilityTimer = 15f;
+    public ParticleSystem AnimationInvisibiity;
+    public AudioSource InvisibilitySpell;
 
     // Start is called before the first frame update
     void Start()
@@ -154,6 +156,7 @@ public class PlayerStat : MonoBehaviour
     }
     public void IsinvicibleSpell()
     {
+        InvisibilitySpell.Play();
         Isinvincible = true;
         InvincibilityTimer = 15f;
         StartCoroutine(InvincibilityTimerF());

@@ -543,8 +543,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128668273}
   m_LocalRotation: {x: -0.70708394, y: -0.00000021216194, z: -0.00000032221493, w: 0.7071297}
-  m_LocalPosition: {x: -0.05, y: 0.088, z: 0.02}
-  m_LocalScale: {x: 0.31662562, y: 0.2074399, z: 0.8840831}
+  m_LocalPosition: {x: -0.05, y: 0.297, z: 0.02}
+  m_LocalScale: {x: 0.22111371, y: 0.14486448, z: 0.26299557}
   m_Children:
   - {fileID: 1044604001}
   m_Father: {fileID: 489405259}
@@ -2964,6 +2964,8 @@ MonoBehaviour:
   Interfacejeu: {fileID: 0}
   IsRoundOver: 0
   nbEnnemies: 0
+  obj: {fileID: 0}
+  RoundDelay: 5
   isGameOver: 0
 --- !u!4 &761940130
 Transform:
@@ -4706,7 +4708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950008018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -11.5, y: 0, z: -30.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1771165597}
@@ -6171,7 +6173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 490504, guid: 751682349ef7b8546aff2c104411f6b3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.27
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: 490504, guid: 751682349ef7b8546aff2c104411f6b3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14642,7 +14644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6d67fd78499b97640be95e3ea0b4416f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 44.7
+      value: 28.87
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6d67fd78499b97640be95e3ea0b4416f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25763,7 +25765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4758613940171398004, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 63.2
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 4758613940171398004, guid: 92a8de9c1b5b44ee78376f05f1ba8930, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25970,6 +25972,8 @@ MonoBehaviour:
   Calculstat: {fileID: 0}
   Isinvincible: 0
   InvincibilityTimer: 30
+  AnimationInvisibiity: {fileID: 0}
+  InvisibilitySpell: {fileID: 0}
 --- !u!114 &5064258196299866161
 MonoBehaviour:
   m_ObjectHideFlags: 0

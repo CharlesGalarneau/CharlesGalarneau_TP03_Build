@@ -8,14 +8,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
     public bool Paused;
-    const float spawnZoneX = 6f;
+    const float spawnZoneX = 10f;
     const float spawnZoneY = 0f;
-    const float spawnZoneZ = 6f;
+    const float spawnZoneZ = 10f;
     public GameObject prefabSkeleton;
     public Transform player;
     public Transform spawnLocation;
     public InterfaceMenu interfaceMenu;
-    public int NbRound =1;
+    public int NbRound =0;
     
     public GameObject txtGameOver;
     float spawnInterval = 5f;
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public bool IsRoundOver;
     public int nbEnnemies;
     public GameObject obj;
+    public float RoundDelay = 5f;
 
     public bool isGameOver = false; //{ get; private set; }=false;
     
@@ -32,20 +33,25 @@ public class GameManager : MonoBehaviour
         StopPauseJeu();
         Interfacejeu = FindObjectOfType<InterfaceJeu>();
         
-        if (IsRoundOver == false) 
-        {
-
-            Spawner();
-
-        }
-        Spawner();
-        instance = this;
+       
     }
     
     // Update is called once per frame
     void Update()
     {
+
+        if (nbEnnemies ==0 && IsRoundOver)
+        {
+            IsRoundOver = false;
+            Spawner();
+           
+        }
         
+        instance = this;
+
+        EndRound();
+
+
         if (Input.GetKeyDown(KeyCode.P))
         {
            
@@ -60,8 +66,9 @@ public class GameManager : MonoBehaviour
             Vector3 location = new Vector3(Random.Range(-spawnZoneX, spawnZoneX), spawnZoneY, Random.Range(-spawnZoneZ, spawnZoneZ));
              new WaitForSeconds(spawnInterval);
              obj = Instantiate(prefabSkeleton, location, Quaternion.identity);
-             }
-        nbEnnemies += 1;
+            nbEnnemies += 1;
+        }
+       
     }
 
    
@@ -90,14 +97,24 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndRound()
-    { if (IsRoundOver)
+    { if (nbEnnemies ==0)
         {
-            NbRound++;
+            StartCoroutine(RoundStartDelay());
+           // if (RoundDelay <=1f)
+            {
+                IsRoundOver =true;
+                NbRound++;
+            }
         }
     }
     public void DeleteEnnemies()
     {
         nbEnnemies--;
-        Destroy(obj.gameObject);
+        
             }
+    IEnumerator RoundStartDelay()
+    {
+        RoundDelay -= Time.deltaTime;
+        yield return RoundDelay;
+    }
 }   

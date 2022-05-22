@@ -13,14 +13,15 @@ public class SkeletonLifeBar : MonoBehaviour
     void Start()
     {
         ennemies = FindObjectOfType<Ennemies>();
+        //ennemies = GetComponent<Ennemies>();
         Gamemanager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MaxLifeValue = Gamemanager.NbRound * 2;
-       
+        MaxLifeValue = Gamemanager.NbRound * 5;
+        LifeBar.maxValue = MaxLifeValue;
         LifeBar.value = ennemies.hitpoints;
     }
 }

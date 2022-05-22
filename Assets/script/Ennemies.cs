@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Ennemies : MonoBehaviour
 {
@@ -22,34 +23,43 @@ public class Ennemies : MonoBehaviour
     public static bool IsinRange =false;
     public bool IsDead=false;
     public GameObject Player;
-    
-    
+    public Ennemies ennemies;
+    public float MaxLifeValue;
+    public Slider LifeBar;
+   
+
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         Animator = GetComponent<Animator>();
         Gamemanager = FindObjectOfType<GameManager>();
+        ennemies = GetComponent<Ennemies>();
         //target = Player.transform.Find("Player");
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
         //hitpoints = Random.Range(2, 6);
-
-        hitpoints = NbRound * 2;
+       
+        //ennemies = GetComponent<Ennemies>();
+        
+        
         NbRound = Gamemanager.NbRound;
+        hitpoints = NbRound * 5;
         SkeletonAttack = NbRound * 2;
         SkeletonDefence = NbRound - 1;
         foixgagne = NbRound * 5;
-        if (!IsDead)
-        {
+        
+        
             SetTarget(target);
-        }
+        
 
         playerStat = FindObjectOfType<PlayerStat>();
     }
     private void Update()
     {
-        
-        
+        MaxLifeValue = Gamemanager.NbRound * 5;
+        LifeBar.maxValue = MaxLifeValue;
+        LifeBar.value = hitpoints;
+
     }
 
     // Le zombie se fait assigné sa cible (le joueur)
@@ -117,12 +127,13 @@ public class Ennemies : MonoBehaviour
                 
                 StartCoroutine(Attacks());
                 
-                StopCoroutine(Attacks());
+                
                 Attack();
                 
             }
             else
             {
+                StopCoroutine(Attacks());
                 Animator.SetFloat("Horizontal", 1f);
                 Animator.SetFloat("Vertical", 1f);
                 
@@ -147,8 +158,9 @@ public class Ennemies : MonoBehaviour
         CancelInvoke("PlayerProximityCheck");
         playerStat.foix += foixgagne;
         Animator.SetBool("Isdead", true);
-        Destroy(this.gameObject);
-       // Gamemanager.DeleteEnnemies();
+        
+       Destroy(this.gameObject);
+       Gamemanager.DeleteEnnemies();
         IsDead =true;
     }
     public void Attack()
