@@ -5,27 +5,33 @@ using UnityEngine;
 public class Attackpoints : MonoBehaviour
 {
     public Collider Hitennemies;
+    public GameObject ennemies;
+    public PlayerAttack PlayerAttack;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerAttack =FindObjectOfType<PlayerAttack>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        ennemies = FindObjectOfType<GameObject>();
     }
     private void OnTriggerEnter(Collider Other)
     {
-  
-        if (Other.CompareTag("ennemies"))
+
+        if (Other.CompareTag("ennemies") && PlayerAttack.IsAttacking == true )
         {
-            Ennemies DeathEnnemies = Other.GetComponent<Ennemies>();
-            
-            FindObjectOfType<Ennemies>().Hit();
-            
+           
+            GameObject DeathEnnemies = Other.GetComponent<GameObject>();
+
+           // Destroy(ennemies);
+            FindObjectOfType<GameManager>().TakeDamageEnnemies();
+
 
         }
+        else
+            return;
     }
 }

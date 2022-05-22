@@ -64,13 +64,20 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < NbRound * 2; i++)
         { 
             Vector3 location = new Vector3(Random.Range(-spawnZoneX, spawnZoneX), spawnZoneY, Random.Range(-spawnZoneZ, spawnZoneZ));
-             new WaitForSeconds(spawnInterval);
+             new WaitForSeconds(1f);
              obj = Instantiate(prefabSkeleton, location, Quaternion.identity);
             nbEnnemies += 1;
+            
+           obj.GetComponent<Ennemies>().SetTarget(player);
+
         }
+
        
     }
-
+    public void TakeDamageEnnemies()
+    {
+       FindObjectOfType<Ennemies>().Hit();
+    }
    
     public void TakeDamage()
     {

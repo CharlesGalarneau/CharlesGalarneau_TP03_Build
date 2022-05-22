@@ -20,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public Ennemies ennemies;
+    public bool IsAttacking = false;
     // Start is called before the first frame update;
     void Start()
     {
@@ -33,14 +34,14 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         ennemies = GetComponent<Ennemies>();
-        if (Input.GetKeyDown(KeyCode.Keypad1) && playerstat.mana >=20 )
-        {
+        //if (Input.GetKeyDown(KeyCode.Keypad1) && playerstat.mana >=20 )
+        //{
             
-            MagicMissileAttack();
-            playerspell.SpellMagicMissile();
-            playerstat.ManaMagicMissileCost();
-            //Animator.SetBool("IsCasting", false);
-        }
+        //    MagicMissileAttack();
+        //    playerspell.SpellMagicMissile();
+        //    playerstat.ManaMagicMissileCost();
+        //    //Animator.SetBool("IsCasting", false);
+        //}
         if (Input.GetKeyDown(KeyCode.Keypad2) && playerstat.mana >= 20)
         {
 
@@ -51,9 +52,9 @@ public class PlayerAttack : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && IsAttackingUnarmed && IsAttackingLight)
         {
-
+            
             AttacklightUnarmed();
-
+            
 
         }
         if (Input.GetMouseButtonDown(1) && IsAttackingHeavy && IsAttackingUnarmed)
@@ -83,13 +84,15 @@ public class PlayerAttack : MonoBehaviour
             Animator.SetBool("IsAttackingLight", false);
         Animator.SetBool("IsEquipt", false);
             Animator.SetBool("IsAttackingHeavy", false);
-            
+            IsAttacking = false;
+
         }
         if (Input.GetMouseButtonUp(1))
         {
             Animator.SetBool("IsAttackingLight", false);
             Animator.SetBool("IsEquipt", false);
             Animator.SetBool("IsAttackingHeavy", false);
+            IsAttacking = false;
 
         }
         if (Input.GetKeyUp(KeyCode.Keypad1))
@@ -115,6 +118,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Animator.SetBool("IsAttackingLight", true);
         Animator.SetBool("IsEquipt", false);
+        IsAttacking = true;
         //Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
         //foreach (Collider collider in colliders)
         //{
@@ -131,6 +135,7 @@ public class PlayerAttack : MonoBehaviour
         Animator.SetBool("IsAttackingHeavy", true);
         Animator.SetBool("IsEquipt", false);
         playerstat.heavyAttacks();
+        IsAttacking = true;
         StopCoroutine(HeavyDelay());
     }
     void AttacklightArmed()

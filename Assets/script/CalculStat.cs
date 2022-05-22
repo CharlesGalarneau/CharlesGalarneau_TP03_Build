@@ -23,27 +23,27 @@ public class CalculStat : MonoBehaviour
     }
     public void DefenceUpgradeValueCost()
     {
-        coutfoixDefence += coutfoixDefence * 1.15f;
+        coutfoixDefence = coutfoixDefence * 1.15f;
     }
     public void AttackUpgradeValueCost()
     {
-        coutfoixAttack += coutfoixAttack * 1.15f;
+        coutfoixAttack = coutfoixAttack * 1.15f;
     }
     public void SpeedUpgradeValueCost()
     {
-        coutfoixSpeed += coutfoixSpeed * 1.15f;
+        coutfoixSpeed = coutfoixSpeed * 1.15f;
     }
     public void ManaMaxUpgradeValueCost()
     {
-        coutfoixManaMax += coutfoixManaMax * 1.15f;
+        coutfoixManaMax = coutfoixManaMax * 1.15f;
     }
     public void StaminaMaxUpgradeValueCost()
     {
-        coutfoixStaminaMax += coutfoixStaminaMax * 1.15f;
+        coutfoixStaminaMax = coutfoixStaminaMax * 1.15f;
     }
     public void HealthMaxUpgradeValueCost()
     {
-        coutfoixHealhMax += coutfoixHealhMax * 1.15f;
+        coutfoixHealhMax = coutfoixHealhMax * 1.15f;
     }
 }
 

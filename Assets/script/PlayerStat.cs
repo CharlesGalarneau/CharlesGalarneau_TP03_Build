@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
-    public float Hp = 25;
+    public float Hp = 100;
     public float Attack =1;
     public float Defence =0;
-    public float mana = 25;
-   public float Stamina= 25;
-    public int HpMax = 25;
-    public int manaMax = 25;
-    public int StaminaMax = 25;
+    public float mana = 100;
+   public float Stamina= 100;
+    public int HpMax = 100;
+    public int manaMax = 100;
+    public int StaminaMax = 100;
     public float staminaRunning = 5f;
     Animator animator;
     public AudioSource Deathsound;
@@ -34,9 +34,14 @@ public class PlayerStat : MonoBehaviour
         Calculstat = FindObjectOfType<CalculStat>();
         Charactermovements = FindObjectOfType<CharacterMovements>();
         animator = GetComponent<Animator>();
-        Hp = 25;
-        mana = 25;
-        foix = 25;
+        Hp = 100;
+        mana = 100;
+        Stamina = 100;
+        HpMax = 100;
+        HpMax = 100;
+        StaminaMax = 100;
+        manaMax = 100;
+        foix = 50;
         
     }
     void Awake()
@@ -79,7 +84,7 @@ public class PlayerStat : MonoBehaviour
     {
        if (Hp <= HpMax)
         {
-            Hp += 5;
+            Hp += 10;
         
         }
         Debug.Log(Hp);
@@ -88,7 +93,7 @@ public class PlayerStat : MonoBehaviour
     {
         if (mana <= manaMax)
         {
-            mana += 5;
+            mana += 10;
         
         
         }
@@ -98,7 +103,7 @@ public class PlayerStat : MonoBehaviour
     {
         if (Stamina <= StaminaMax)
         {
-            Stamina += 5;
+            Stamina += 10;
         
         }
         Debug.Log(Stamina);
@@ -121,7 +126,7 @@ public class PlayerStat : MonoBehaviour
     }
     public void ManaMagicMissileCost()
     {
-        mana -= 20;
+        mana -= 50;
     }
     public void UpgradeSpeed()
     {
@@ -136,22 +141,22 @@ public class PlayerStat : MonoBehaviour
     }
     public void UpgradeMaxHp()
     {
-        HpMax += 5;
+        HpMax += 10;
         foix -= Calculstat.coutfoixHealhMax;
     }
     public void UpgradeMaxMana()
     {
-        manaMax += 5;
+        manaMax += 10;
         foix -= Calculstat.coutfoixManaMax;
     }
     public void UpgradeMaxStamina()
     {
-        StaminaMax += 5;
+        StaminaMax += 10;
         foix -= Calculstat.coutfoixStaminaMax;
     }
     public void Upgradedefence()
     {
-        Defence += 1;
+        Defence += 10;
         foix -= Calculstat.coutfoixDefence;
     }
     public void IsinvicibleSpell()

@@ -8,7 +8,7 @@ public class Ennemies : MonoBehaviour
 {
     public Transform target;
 
-    public static NavMeshAgent agent;
+    public NavMeshAgent agent;
     GameObject Weapon;
     public float hitpoints;
     Animator Animator;
@@ -19,96 +19,100 @@ public class Ennemies : MonoBehaviour
     public int NbRound =1;
     public GameManager Gamemanager;
     int attacksCooldown = 5;
-    bool IsAttacking;
+    public bool IsAttacking;
     public static bool IsinRange =false;
     public bool IsDead=false;
     public GameObject Player;
     public Ennemies ennemies;
     public float MaxLifeValue;
     public Slider LifeBar;
-   
+    public Rigidbody rb;
+    public Collider PlayerHit;
+    public Vector3 objectif;
 
 
     void Start()
     {
-        
+
         //target = Player.transform.Find("Player");
         // La quantité de tir du joueur pour tué le zombie (entre 2 et 3)
         //hitpoints = Random.Range(2, 6);
-       
+
         //ennemies = GetComponent<Ennemies>();
-        
-        
-        NbRound = Gamemanager.NbRound;
-        hitpoints = NbRound * 5;
-        SkeletonAttack = NbRound * 2;
-        SkeletonDefence = NbRound - 1;
-        foixgagne = NbRound * 5;
-        
-        
-           
+        agent = GetComponent<NavMeshAgent>();
         
 
+        NbRound = Gamemanager.NbRound;
+        hitpoints = NbRound * 2;
+        SkeletonAttack = NbRound;
+        SkeletonDefence = NbRound -1;
+        foixgagne = NbRound * 5;
+
+        
+
+
+
         playerStat = FindObjectOfType<PlayerStat>();
+        //InvokeRepeating("UpdateDestination", 0.1f, 1f);
+        
     }
     private void Awake()
     {
 
-        agent = GetComponent<NavMeshAgent>();
+        
         Animator = GetComponent<Animator>();
         Gamemanager = FindObjectOfType<GameManager>();
-        ennemies = GetComponent<Ennemies>();
-        SetTarget(target);
+        
+        rb = GetComponent<Rigidbody>();
+        
+       
     }
     private void Update()
     {
+        //objectif = target.position;
+        Debug.Log(target.position);
+        ennemies = GetComponent<Ennemies>();
+       
+        
         MaxLifeValue = Gamemanager.NbRound * 5;
         LifeBar.maxValue = MaxLifeValue;
         LifeBar.value = hitpoints;
-
+        InvokeRepeating("UpdateDestination", 0.1f, 2.5f);
+        InvokeRepeating("PlayerProximityCheck", 0.1f, 2.5f);
+       
+        
     }
 
     // Le zombie se fait assigné sa cible (le joueur)
     public void SetTarget(Transform t)
     {
-       
-        
-       
 
-            target = t;
 
+        agent = GetComponent<NavMeshAgent>();
+
+        target = t;
+        agent.SetDestination(target.position);
         // À toutes les secondes, le zombie ajustera la position de sa cible
-        InvokeRepeating("UpdateDestination", 0.1f, 1f);
+
 
         // À toutes les 0.5s, le zombie vérifie si le joueur est a proximité (si oui, c'est game over)
-        InvokeRepeating("PlayerProximityCheck", 0.1f, 0.25f);
+        //InvokeRepeating("PlayerProximityCheck", 0.1f, 0.25f);
         Animator.SetFloat("Horizontal", 1f);
         Animator.SetFloat("Vertical", 1f);
-        if (IsDead == false)
-        {
-            agent.SetDestination(target.position);
-        }
+       
+       
+
        
        
 
     }
-
-    void UpdateDestination()
+    public void UpdateDestination()
     {
-        // Si le jeu est finit, on ne fait rien
-        if (GameManager.instance.isGameOver)
-            return;
-        if (GameManager.instance.Paused)
-            return;
-      //  if (IsDead == false) ;
-           
-
-        // Ajuster la cible
-
-
         
- 
+        agent.SetDestination(target.position);
+        
     }
+
 
     void PlayerProximityCheck()
     {
@@ -134,7 +138,7 @@ public class Ennemies : MonoBehaviour
                 StartCoroutine(Attacks());
                 
                 
-                Attack();
+              
                 
             }
             else
@@ -171,32 +175,39 @@ public class Ennemies : MonoBehaviour
     }
     public void Attack()
     {
-        if (attacksCooldown == 0)
-        {
-            if (IsAttacking)
+       
                
             FindObjectOfType<GameManager>().TakeDamage();
-            attacksCooldown = 5;
-        }
-        else
-            attacksCooldown--;
+
     }
     IEnumerator Attacks()
     {
-        if (attacksCooldown == 0)
-        {
+      
 
             Animator.SetBool("IsAttacking", true);
+            
             yield return new WaitForSeconds(1f); 
             IsAttacking = true;
-            
-            yield return new WaitForSeconds(.1f);
+        
+        yield return new WaitForSeconds(.1f);
             Animator.SetBool("IsAttacking", false);
             IsAttacking = false;
             yield return new WaitForSeconds(.1f);
-        }
+        
 
     }
-    
-   
+    //private void OnTriggerEnter(Collider collider)
+    //{
+
+    //   // if (collider.CompareTag("Player"))
+    //    {
+    //        //PlayerStat Player = collider.GetComponent<PlayerStat>();
+
+    //        Attack();
+
+
+    //    }
+    //}
+
+
 }
