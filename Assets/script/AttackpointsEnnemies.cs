@@ -20,7 +20,7 @@ public class AttackpointsEnnemies : MonoBehaviour
     private void OnTriggerEnter(Collider Other)
     {
 
-        if (ennemies.IsAttacking ==true) //(Other.CompareTag("Players"))
+        if (Other.CompareTag("Players"))
         {
            
 

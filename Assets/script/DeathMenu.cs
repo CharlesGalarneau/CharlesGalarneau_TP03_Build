@@ -8,7 +8,7 @@ public class DeathMenu : MonoBehaviour
 {
     public GameManager Gamemanager;
     public Button RetourauMenu;
-   
+    public Text NbRound;
    
     // Start is called before the first frame update
     void Start()
@@ -18,17 +18,18 @@ public class DeathMenu : MonoBehaviour
         RetourauMenu.onClick.AddListener(FermetureMenu);
         
         gameObject.SetActive(false);
-        
 
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        NbRound.text = Gamemanager.NbRound.ToString();
 
         if (Gamemanager.isGameOver ==true)
         {
-            OuvertureMenu();
+            gameObject.SetActive(true);
         }
     }
     public void FermetureMenu()

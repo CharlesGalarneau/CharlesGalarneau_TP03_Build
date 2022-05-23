@@ -42,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
         //    playerstat.ManaMagicMissileCost();
         //    //Animator.SetBool("IsCasting", false);
         //}
-        if (Input.GetKeyDown(KeyCode.Keypad2) && playerstat.mana >= 20)
+        if (Input.GetKeyDown(KeyCode.F) && playerstat.mana >= 50)
         {
 
             MagicMissileAttack();

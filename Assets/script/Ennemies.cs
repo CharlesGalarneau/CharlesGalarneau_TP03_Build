@@ -44,7 +44,7 @@ public class Ennemies : MonoBehaviour
 
         NbRound = Gamemanager.NbRound;
         hitpoints = NbRound * 2;
-        SkeletonAttack = NbRound;
+        SkeletonAttack = NbRound*5;
         SkeletonDefence = NbRound -1;
         foixgagne = NbRound * 5;
 
@@ -54,7 +54,9 @@ public class Ennemies : MonoBehaviour
 
         playerStat = FindObjectOfType<PlayerStat>();
         //InvokeRepeating("UpdateDestination", 0.1f, 1f);
-        
+        InvokeRepeating("UpdateDestination", 0.1f, 2.5f);
+        InvokeRepeating("PlayerProximityCheck", 0.1f, 1f);
+
     }
     private void Awake()
     {
@@ -70,15 +72,14 @@ public class Ennemies : MonoBehaviour
     private void Update()
     {
         //objectif = target.position;
-        Debug.Log(target.position);
+       
         ennemies = GetComponent<Ennemies>();
        
         
-        MaxLifeValue = Gamemanager.NbRound * 5;
+        MaxLifeValue = Gamemanager.NbRound * 2;
         LifeBar.maxValue = MaxLifeValue;
         LifeBar.value = hitpoints;
-        InvokeRepeating("UpdateDestination", 0.1f, 2.5f);
-        InvokeRepeating("PlayerProximityCheck", 0.1f, 2.5f);
+        
        
         
     }
@@ -189,11 +190,11 @@ public class Ennemies : MonoBehaviour
             yield return new WaitForSeconds(1f); 
             IsAttacking = true;
         
-        yield return new WaitForSeconds(.1f);
+             yield return new WaitForSeconds(.1f);
             Animator.SetBool("IsAttacking", false);
             IsAttacking = false;
-            yield return new WaitForSeconds(.1f);
-        
+            yield return new WaitForSeconds(1f);
+            
 
     }
     //private void OnTriggerEnter(Collider collider)

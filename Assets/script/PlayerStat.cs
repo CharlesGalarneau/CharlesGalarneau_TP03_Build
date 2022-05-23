@@ -156,7 +156,7 @@ public class PlayerStat : MonoBehaviour
     }
     public void Upgradedefence()
     {
-        Defence += 10;
+        Defence += 1;
         foix -= Calculstat.coutfoixDefence;
     }
     public void IsinvicibleSpell()
@@ -168,7 +168,7 @@ public class PlayerStat : MonoBehaviour
     }
     public void heavyAttacks()
     {
-        Attack = AttackValue * 1.25f;
+        //Attack = Attack + 1f;
     }
     IEnumerator InvincibilityTimerF()
     {

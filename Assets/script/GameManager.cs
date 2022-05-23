@@ -24,16 +24,21 @@ public class GameManager : MonoBehaviour
     public int nbEnnemies;
     public GameObject obj;
     public float RoundDelay = 5f;
+    public DeathMenu Deathmenu;
 
     public bool isGameOver = false; //{ get; private set; }=false;
     
     // Start is called before the first frame update
     void Start()
     {
+        #if !UNITY_EDITOR && UNITY_WEBGL
+        UnityEngine.WebGLInput.captureAllKeyboardInput = false;
+        #endif
+
         StopPauseJeu();
         Interfacejeu = FindObjectOfType<InterfaceJeu>();
-        
-       
+        Deathmenu = FindObjectOfType<DeathMenu>();
+
     }
     
     // Update is called once per frame
@@ -61,7 +66,7 @@ public class GameManager : MonoBehaviour
   
     public void Spawner()
     {
-        for (int i = 0; i < NbRound * 2; i++)
+        //for (int i = 0; i < NbRound * 2; i++)
         { 
             Vector3 location = new Vector3(Random.Range(-spawnZoneX, spawnZoneX), spawnZoneY, Random.Range(-spawnZoneZ, spawnZoneZ));
              new WaitForSeconds(1f);
@@ -87,6 +92,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
+        Time.timeScale = 0;
+        Deathmenu.OuvertureMenu();
         Interfacejeu.IsGameOver();
         StopAllCoroutines();
         
