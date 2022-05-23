@@ -29,7 +29,7 @@ public class DeathMenu : MonoBehaviour
 
         if (Gamemanager.isGameOver ==true)
         {
-            gameObject.SetActive(true);
+            //gameObject.SetActive(true);
         }
     }
     public void FermetureMenu()
@@ -42,7 +42,7 @@ public class DeathMenu : MonoBehaviour
     
     public void OuvertureMenu()
     {
-        Gamemanager.PauseJeu();
+        //Gamemanager.PauseJeu();
         gameObject.SetActive(true);
     }
 }

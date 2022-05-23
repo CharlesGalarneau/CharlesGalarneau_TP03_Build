@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class GameManager : MonoBehaviour
 {
 
@@ -20,27 +21,28 @@ public class GameManager : MonoBehaviour
     public GameObject txtGameOver;
     float spawnInterval = 5f;
     public InterfaceJeu Interfacejeu;
+    public DeathMenu Deathmenu;
     public bool IsRoundOver;
     public int nbEnnemies;
     public GameObject obj;
     public float RoundDelay = 5f;
-    public DeathMenu Deathmenu;
+    
 
     public bool isGameOver = false; //{ get; private set; }=false;
     
     // Start is called before the first frame update
     void Start()
     {
-        #if !UNITY_EDITOR && UNITY_WEBGL
-        UnityEngine.WebGLInput.captureAllKeyboardInput = false;
-        #endif
+       
 
         StopPauseJeu();
         Interfacejeu = FindObjectOfType<InterfaceJeu>();
         Deathmenu = FindObjectOfType<DeathMenu>();
-
+        #if !UNITY_EDITOR && UNITY_WEBGL
+        UnityEngine.WebGLInput.captureAllKeyboardInput = false;
+        #endif
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -92,8 +94,9 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
-        Time.timeScale = 0;
         Deathmenu.OuvertureMenu();
+        Time.timeScale = 0;
+        
         Interfacejeu.IsGameOver();
         StopAllCoroutines();
         

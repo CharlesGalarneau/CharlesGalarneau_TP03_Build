@@ -95,12 +95,12 @@ public class PlayerAttack : MonoBehaviour
             IsAttacking = false;
 
         }
-        if (Input.GetKeyUp(KeyCode.Keypad1))
-        {
-            Animator.SetBool("IsCasting", false);
+        //if (Input.GetKeyUp(KeyCode.Keypad1))
+        //{
+        //    Animator.SetBool("IsCasting", false);
 
-        }
-        if (Input.GetKeyUp(KeyCode.Keypad2))
+        //}
+        if (Input.GetKeyUp(KeyCode.F))
         {
             Animator.SetBool("IsCasting", false);
 
