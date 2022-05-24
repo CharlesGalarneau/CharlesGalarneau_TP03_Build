@@ -166,6 +166,7 @@ public class PlayerStat : MonoBehaviour
         InvincibilityTimer = 15f;
         StartCoroutine(InvincibilityTimerF());
     }
+    // PROF: Pourquoi y a-t-il des fonctions de sorts dans le script de stats?
     public void heavyAttacks()
     {
         //Attack = Attack + 1f;

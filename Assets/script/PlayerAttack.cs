@@ -50,6 +50,9 @@ public class PlayerAttack : MonoBehaviour
             playerstat.ManaMagicMissileCost();
             //Animator.SetBool("IsCasting", false);
         }
+
+        // PROF: On ne devrait pas gérer chacune des attaque ainsi, on devrait tout simplement regarder si isAttacking
+
         if (Input.GetMouseButtonDown(0) && IsAttackingUnarmed && IsAttackingLight)
         {
             
